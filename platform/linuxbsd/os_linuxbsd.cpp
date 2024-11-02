@@ -49,6 +49,8 @@
 #include "modules/regex/regex.h"
 #endif
 
+#include "modules/tracy/tracy.h"
+
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -962,6 +964,8 @@ void OS_LinuxBSD::run() {
 		if (Main::iteration()) {
 			break;
 		}
+
+		FrameMark;
 	}
 
 	main_loop->finalize();

@@ -33,6 +33,8 @@
 
 #include "thread.h"
 
+#include "modules/tracy/tracy.h"
+
 #ifdef THREADS_ENABLED
 #include "core/object/script_language.h"
 #include "core/templates/safe_refcount.h"
@@ -51,6 +53,14 @@ void Thread::_set_platform_functions(const PlatformFunctions &p_functions) {
 #ifdef THREADS_ENABLED
 void Thread::callback(ID p_caller_id, const Settings &p_settings, Callback p_callback, void *p_userdata) {
 	Thread::caller_id = p_caller_id;
+
+#ifdef TRACY_ENABLE
+	if (caller_id == MAIN_ID)
+		tracy::SetThreadName("main");
+	else
+		tracy::SetThreadName(vformat("thread_%d", caller_id).ascii().get_data());
+#endif
+
 	if (platform_functions.set_priority) {
 		platform_functions.set_priority(p_settings.priority);
 	}

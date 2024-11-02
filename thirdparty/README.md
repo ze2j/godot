@@ -903,6 +903,13 @@ Files extracted from upstream source:
 See `thorvg/update-thorvg.sh` for extraction instructions. Set the version
 number and run the script.
 
+## tracy
+- Upstream: https://github.com/wolfpld/tracy/releases/tag/v0.11.1
+- version : 0.11.1 (5d542dc, 08/2024)
+- License: BSD-3-Clause
+
+Extracted only the public folder.
+
 
 ## ufbx
 
