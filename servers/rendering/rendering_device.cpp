@@ -36,6 +36,8 @@
 #include "core/config/project_settings.h"
 #include "core/io/dir_access.h"
 
+#include "modules/tracy/tracy.h"
+
 // TODO: Thread safety
 // - Roll back thread safe attribute for RID_Owner members after the read-only/atomic update scheme is implemented.
 
@@ -1019,6 +1021,7 @@ RID RenderingDevice::texture_create_from_extension(TextureType p_type, DataForma
 }
 
 RID RenderingDevice::texture_create_shared_from_slice(const TextureView &p_view, RID p_with_texture, uint32_t p_layer, uint32_t p_mipmap, uint32_t p_mipmaps, TextureSliceType p_slice_type, uint32_t p_layers) {
+	ZoneScoped;
 	Texture *src_texture = texture_owner.get_or_null(p_with_texture);
 	ERR_FAIL_NULL_V(src_texture, RID());
 
